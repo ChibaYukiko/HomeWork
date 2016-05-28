@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 
-char table[256]; //入力した文字列を代入
+char input[256]; //入力した文字列を代入
 char answer[256]; //答えを入力
 
 char buffer[256];
@@ -14,19 +14,16 @@ char buffer2[256]; //search で使う
 FILE *fp;
 
 
-void insertionsort (char *s){ //配列を挿入法で整列する
+void insertionsort (char *s, int last){ //配列を挿入法で整列する
 
   int i,j;
   char key;
-
-  
-  int last = strlen(s)-1;
 
   for( i=0; i<last; i++ ){
     s[i] = tolower( s[i] );
   }
 
-  for(i = 1; i < last; i++){
+  for(i = 0; i < last; i++){
 
     key = s[i];
 
@@ -44,7 +41,7 @@ void insertionsort (char *s){ //配列を挿入法で整列する
   
 }
 
-void search(){
+void search(char *table, int m){
 
   int n = 0;
 
@@ -55,13 +52,13 @@ void search(){
 
     strcpy(buffer2, buffer); // buffer2 にsortする前の文字列を保存する
 
-    insertionsort(buffer); // 文字列のsort
+    insertionsort(buffer, stl); // 文字列のsort
 
     int ret = strncmp(buffer, table, stl); 
    
     if( ret == 0 ){ //文字列が一致した時
 
-      if(stl == 16){ //16文字一致したものを見つけたら
+      if(stl == m){ //16文字一致したものを見つけたら
 	strcpy(answer, buffer2);
 	break;
       }else if (n < stl){ //前に見つけたものよりも、文字列が長かったら
@@ -90,14 +87,20 @@ int main(){
 
   printf(" 16words 入力してください: ");
 
-  scanf("%s", table);
+  scanf("%s", input);
 
-  insertionsort(table);
+  int q = strlen(input);
+
+  insertionsort(input, q);
 
   printf("\n 辞書順に文字を並べました : %s \n", table);
 
-  search();
+  for(q; q>0 ; q--){
+    
+    search(input,q);
 
+  }
+  
   printf("\n answer is : %s \n", answer);
 
   fclose(fp);
