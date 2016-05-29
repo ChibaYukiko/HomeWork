@@ -85,7 +85,7 @@ int main(){
 
   insertionsort(table, q);
 
-  printf("\n 辞書順に文字を並べました : %s \n", table);
+  // printf("\n 辞書順に文字を並べました : %s \n", table);
 
   search();
   
