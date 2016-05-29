@@ -44,22 +44,33 @@ void insertionsort (char *s, int last){ //配列を挿入法で整列する
 void search(){
 
   int n = 0;
-  char *kari_ans;
+  char /* *kari_ans,*/ give[256], *adr;
  
   while( fgets(buffer, 256, fp) != NULL ){
-   
+
+    int i, j = 0;
+
+    strcpy(give, table);
+  
     int stl = strlen(buffer)-1; // 一行の文字列の文字数を数える
 
     strcpy(buffer2, buffer); // buffer2 にsortする前の文字列を保存する
 
     insertionsort(buffer, stl); // buffer文字列のsort
 
-    strtok(buffer, "\n"); // bufferの改行を除いた文字列の作成
+    // strtok(buffer, "\n"); // bufferの改行を除いた文字列の作成
 
-    kari_ans = strstr(table, buffer);
-  
-    if( (kari_ans != NULL) && (n < stl) ){ //一致しともので一番大きな文字数のものを探す
-      //printf("一致しました！%s\n",kari_ans);
+    
+    for(i=0; i<16; i++){
+
+      if(buffer[j] == table[i]){
+	j++;
+      }
+      
+    }
+    
+    if((j == stl) && (n < stl)){
+      printf("%s",buffer2);
       strcpy(answer, buffer2);
       n = stl;
     }
