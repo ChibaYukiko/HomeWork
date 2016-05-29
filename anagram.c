@@ -8,7 +8,7 @@ char table[256]; //入力した文字列を代入
 char answer[256]; //答えを入力
 
 char buffer[256];
-char buffer2[256]; //search で使う
+char buffer2[256];//search で使う
 
 
 FILE *fp;
@@ -47,47 +47,22 @@ void search(){
   char *kari_ans;
  
   while( fgets(buffer, 256, fp) != NULL ){
-
+   
     int stl = strlen(buffer)-1; // 一行の文字列の文字数を数える
-
-    //printf("%s %d\n",buffer,stl);
 
     strcpy(buffer2, buffer); // buffer2 にsortする前の文字列を保存する
 
-    insertionsort(buffer, stl); // 文字列のsort
+    insertionsort(buffer, stl); // buffer文字列のsort
+
+    strtok(buffer, "\n"); // bufferの改行を除いた文字列の作成
 
     kari_ans = strstr(table, buffer);
-
-    //printf("before:%s, after:%s\n",buffer2,buffer);
-
-    
-    if( (kari_ans != NULL) /* && (n < stl)*/ ){
-      printf("一致しました！\n");
+  
+    if( (kari_ans != NULL) && (n < stl) ){ //一致しともので一番大きな文字数のものを探す
+      //printf("一致しました！%s\n",kari_ans);
       strcpy(answer, buffer2);
       n = stl;
     }
-    
-
-    /*
-
-      int ret = strncmp(buffer, table, stl); 
-   
-    if( ret == 0 ){ //文字列が一致した時
-
-      if(stl == m){ //16文字一致したものを見つけたら
-	strcpy(answer, buffer2);
-	break;
-      }else if (n < stl){ //前に見つけたものよりも、文字列が長かったら
-	strcpy(answer, buffer2);
-	n = stl;
-	printf("%d 文字一致！\n", stl);
-      }else{
-	//どうしよう
-      }
-    }else{
-      //printf("一致しません\n");
-    }
-    */
   
   }
   
@@ -97,7 +72,7 @@ void search(){
 
 int main(){
 
-  if ((fp = fopen("/usr/share/dict/words", "r")) == NULL) {
+  if ((fp = fopen("/usr/share/dict/words", "r")) == NULL) { // /usr/share/dict/words
     printf("file open error!!\n");
     exit(EXIT_FAILURE);	/* エラーの場合は通常、異常終了する */
   }
