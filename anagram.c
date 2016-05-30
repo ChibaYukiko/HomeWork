@@ -27,8 +27,6 @@ void insertionsort (char *s, int last){ //配列を挿入法で整列する
 
     key = s[i];
 
-    //table[0] = key; 番兵
-    
     j = i - 1;
     
     while(j>=0 && key<s[j]){ //key<table[j]
@@ -44,21 +42,16 @@ void insertionsort (char *s, int last){ //配列を挿入法で整列する
 void search(){
 
   int n = 0;
-  char /* *kari_ans,*/ give[256], *adr;
  
   while( fgets(buffer, 256, fp) != NULL ){
 
     int i, j = 0;
 
-    strcpy(give, table);
-  
     int stl = strlen(buffer)-1; // 一行の文字列の文字数を数える
 
     strcpy(buffer2, buffer); // buffer2 にsortする前の文字列を保存する
 
     insertionsort(buffer, stl); // buffer文字列のsort
-
-    // strtok(buffer, "\n"); // bufferの改行を除いた文字列の作成
 
     
     for(i=0; i<16; i++){
@@ -95,8 +88,6 @@ int main(){
   int q = strlen(table);
 
   insertionsort(table, q);
-
-  // printf("\n 辞書順に文字を並べました : %s \n", table);
 
   search();
   
