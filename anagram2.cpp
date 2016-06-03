@@ -16,7 +16,7 @@ fstream ifs;
 
 void search(){
 
-  std::cout << "search start" << endl;
+  //std::cout << "search start" << endl;
 
   int stl, n=0;
   
@@ -33,12 +33,30 @@ void search(){
 
     transform(str.begin(), str.end(), str.begin(), ::tolower); //全部　小文字に
 
+    /*int h,rep = 0;
+    for(int m=0;m <= stl; m++){
+      if(str[m] == 0x27){
+	rep = 1;
+	h=m;
+	break;
+      }
+    }
+    
+    if(rep == 1){
+      str.replace(h,1,"");
+      stl= stl - 1;
+      }*/
+    
     sort(str.begin(), str.end()); //abc順に
 
     for(i=0; i<16; i++){
       if(str[j] == table[i]){
 	j++;
       }
+
+      /*if(j == stl){
+	break;
+	}*/
     }
 
     if((j==stl) && (n < stl)){
