@@ -8,7 +8,8 @@ char table[256]; //入力した文字列を代入
 char answer[256]; //答えを入力
 
 char buffer[256];
-char buffer2[256];//search で使う
+char buffer2[256];
+char buffer3[256];//search で使う
 
 
 FILE *fp;
@@ -42,28 +43,45 @@ void insertionsort (char *s, int last){ //配列を挿入法で整列する
 void search(){
 
   int n = 0;
+
  
-  while( fgets(buffer, 256, fp) != NULL ){
+  while( fgets(buffer3, 256, fp) != NULL ){
 
-    int i, j = 0;
+    int i, j = 0, t = 0;
 
-    int stl = strlen(buffer)-1; // 一行の文字列の文字数を数える
+    memset(buffer,0,sizeof(buffer));
 
-    strcpy(buffer2, buffer); // buffer2 にsortする前の文字列を保存する
+    int stl = strlen(buffer3)-1; // 一行の文字列の文字数を数える
 
-    insertionsort(buffer, stl); // buffer文字列のsort
+    strcpy(buffer2, buffer3); // buffer2 にsortする前の文字列を保存する
 
-    
+    for(int k=0; k<= stl; k++){
+      if(('A'<= buffer3[k]) && (buffer3[k] <= 'z')){
+	buffer[t] = buffer3[k];
+	t++;
+      }
+    }
+
+
+    insertionsort(buffer, t); // buffer文字列のsort
+
     for(i=0; i<16; i++){
 
       if(buffer[j] == table[i]){
 	j++;
       }
-      
+
+      if(j == t){
+	break;
+      }
     }
-    
-    if((j == stl) && (n < stl)){
-      printf("%s",buffer2);
+
+   
+
+    if((j == t) && (n < t)){
+      printf("answer input : %s",buffer2);
+
+      //printf("j:%d, t:%d\n",j,t);
       strcpy(answer, buffer2);
       n = stl;
     }
