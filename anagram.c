@@ -83,7 +83,7 @@ void search(){
 
       //printf("j:%d, t:%d\n",j,t);
       strcpy(answer, buffer2);
-      n = stl;
+      n = t;
     }
   
   }
